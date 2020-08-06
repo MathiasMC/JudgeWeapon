@@ -1,0 +1,52 @@
+#                                         #
+#               JudgeWeapon               #
+#                   by                    #
+#                MathiasMC                #
+#  Any ideas for the plugin or need help? #
+#           contact me on spigot          #
+#                                         #
+players: []
+judge_sword:
+  material: diamond_sword
+  name: '&cJudge Sword'
+  lore:
+  - '&6Linked: {player}'
+  enchantments:
+  - sharpness:4
+  attributes: []
+  hide-flags:
+  - hide_enchants
+  - hide_attributes
+judge_pickaxe:
+  material: diamond_pickaxe
+  name: '&cJudge Pickaxe'
+  lore:
+    - '&6Linked: {player}'
+  enchantments:
+    - unbreaking:3
+  attributes: []
+  hide-flags:
+    - hide_enchants
+    - hide_attributes
+judge_axe:
+  material: diamond_axe
+  name: '&cJudge Axe'
+  lore:
+    - '&6Linked: {player}'
+  enchantments:
+    - sharpness:4
+  attributes: []
+  hide-flags:
+    - hide_enchants
+    - hide_attributes
+judge_shovel:
+  material: diamond_shovel
+  name: '&cJudge Shovel'
+  lore:
+    - '&6Linked: {player}'
+  enchantments:
+    - unbreaking:3
+  attributes: []
+  hide-flags:
+    - hide_enchants
+    - hide_attributes

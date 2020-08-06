@@ -1,0 +1,187 @@
+#                                         #
+#               JudgeWeapon               #
+#                   by                    #
+#                MathiasMC                #
+#  Any ideas for the plugin or need help? #
+#           contact me on spigot          #
+#                                         #
+
+command:
+  permission:
+    - 'judgeweapon message {player} &7[&cJudgeWeapon&7] &cYou dont have access to use this command!'
+  unknown:
+    - 'judgeweapon message {player} &7[&cJudgeWeapon&7] &cUnknown sub command &f{command}'
+  message:
+    - 'judgeweapon message {player} &c&m---------------------------------------------'
+    - 'judgeweapon message {player} &7&l> &cJudgeWeapon created by &eMathiasMC'
+    - 'judgeweapon message {player} &7&l> &bVersion: &e{version}'
+    - 'judgeweapon message {player} &7&l> &f/judgeweapon help for list of commands'
+    - 'judgeweapon message {player} &7&l> &2Any ideas for the plugin or need help?'
+    - 'judgeweapon message {player} &7&l> &2Contact me on spigot'
+    - 'judgeweapon message {player} &c&m---------------------------------------------'
+help:
+  permission:
+    - 'judgeweapon message {player} &7[&cJudgeWeapon&7] &cYou dont have access to use this command!'
+  message:
+    - 'judgeweapon message {player} &c&m---------------------------------------------'
+    - 'judgeweapon message {player} &7&l> &f/judgeweapon message <player> <text>'
+    - 'judgeweapon message {player} &7&l> &f/judgeweapon reload'
+    - 'judgeweapon message {player} &7&l> &f/judgeweapon make <name>'
+    - 'judgeweapon message {player} &7&l> &f/judgeweapon link <name> <player>'
+    - 'judgeweapon message {player} &7&l> &f/judgeweapon unlink <player>'
+    - 'judgeweapon message {player} &7&l> &f/judgeweapon effect give <player> <effect> <seconds> <amplifier> <particles>'
+    - 'judgeweapon message {player} &7&l> &f/judgeweapon effect clear <player>'
+    - 'judgeweapon message {player} &c&m---------------------------------------------'
+reload:
+  permission:
+    - 'battledrones message {player} &7[&cJudgeWeapon&7] &cYou dont have access to use this command!'
+  usage:
+    - 'battledrones message {player} &7[&cJudgeWeapon&7] &cUsage: /judgeweapon reload <all, config, language, data>'
+  all:
+    - 'battledrones message {player} &7[&cJudgeWeapon&7] &eReloaded all configs'
+  config:
+    - 'battledrones message {player} &7[&cJudgeWeapon&7] &eReloaded config.yml'
+  language:
+    - 'battledrones message {player} &7[&cJudgeWeapon&7] &eReloaded language.yml'
+  data:
+    - 'battledrones message {player} &7[&cJudgeWeapon&7] &eReloaded data.yml'
+effect:
+  permission:
+    - 'judgeweapon message {player} &7[&cJudgeWeapon&7] &cYou dont have access to use this command!'
+  usage:
+    - 'judgeweapon message {player} &7[&cJudgeWeapon&7] &cUsage: /judgeweapon effect <give, clear>'
+  online:
+    - 'judgeweapon message {player} &7[&cJudgeWeapon&7] &cThe player is not online!'
+  clear:
+    usage:
+      - 'judgeweapon message {player} &7[&cJudgeWeapon&7] &cUsage: /judgeweapon effect clear <player>'
+    player:
+      - 'judgeweapon message {player} &7[&cJudgeWeapon&7] &eCleared effect for player {target}'
+  give:
+    usage:
+      - 'judgeweapon message {player} &7[&cJudgeWeapon&7] &cUsage: /judgeweapon effect give <player> <effect> <seconds> <amplifier> <particles>'
+    found:
+      - 'judgeweapon message {player} &7[&cJudgeWeapon&7] &cThe effect is not found.'
+    seconds:
+      - 'judgeweapon message {player} &7[&cJudgeWeapon&7] &cSeconds is not an integer'
+    amplifier:
+      - 'judgeweapon message {player} &7[&cJudgeWeapon&7] &cAmplifier is not an integer'
+    player:
+      - 'judgeweapon message {player} &7[&cJudgeWeapon&7] &eGiven effect {effect} to {target}'
+message:
+  permission:
+    - 'judgeweapon message {player} &7[&cJudgeWeapon&7] &cYou dont have access to use this command!'
+  usage:
+    - 'judgeweapon message {player} &7[&cJudgeWeapon&7] &cUsage: /judgeweapon message <player> <text>'
+  online:
+    - 'judgeweapon message {player} &7[&cJudgeWeapon&7] &cThe player is not online!'
+make:
+  permission:
+    - 'judgeweapon message {player} &7[&cJudgeWeapon&7] &cYou dont have access to use this command!'
+  usage:
+    - 'judgeweapon message {player} &7[&cJudgeWeapon&7] &cUsage: /judgeweapon make <name>'
+  already:
+    - 'judgeweapon message {player} &7[&cJudgeWeapon&7] &cYou already have an item with that name!'
+  air:
+    - 'judgeweapon message {player} &7[&cJudgeWeapon&7] &cYou need to have an item in your hand!'
+  created:
+    - 'judgeweapon message {player} &7[&cJudgeWeapon&7] &eCreated item with name {name}'
+link:
+  permission:
+    - 'judgeweapon message {player} &7[&cJudgeWeapon&7] &cYou dont have access to use this command!'
+  usage:
+    - 'judgeweapon message {player} &7[&cJudgeWeapon&7] &cUsage: /judgeweapon link <name> <player>'
+  found:
+    - 'judgeweapon message {player} &7[&cJudgeWeapon&7] &cThe name is not found.'
+  online:
+    - 'judgeweapon message {player} &7[&cJudgeWeapon&7] &cThe player is not online!'
+  player:
+    - 'judgeweapon message {player} &7[&cJudgeWeapon&7] &eLinked item to &6{target}'
+    - 'judgeweapon message {target} &7[&cJudgeWeapon&7] &eYou have got an linked item.'
+unlink:
+  permission:
+    - 'judgeweapon message {player} &7[&cJudgeWeapon&7] &cYou dont have access to use this command!'
+  usage:
+    - 'judgeweapon message {player} &7[&cJudgeWeapon&7] &cUsage: /judgeweapon unlink <player>'
+  online:
+    - 'judgeweapon message {player} &7[&cJudgeWeapon&7] &cThe player is not online!'
+  player:
+    - 'judgeweapon message {player} &7[&cJudgeWeapon&7] &eRemoved effects from &6{target}'
+    - 'judgeweapon message {target} &7[&cJudgeWeapon&7] &eYou have been saved from the effects.'
+console:
+  command:
+    unknown:
+      - '&7[&cJudgeWeapon&7] &cUnknown sub command &f{command}'
+    message:
+      - '&c&m---------------------------------------------'
+      - '&7&l> &cJudgeWeapon created by &eMathiasMC'
+      - '&7&l> &bVersion: &e{version}'
+      - '&7&l> &f/judgeweapon help for list of commands'
+      - '&7&l> &2Any ideas for the plugin or need help?'
+      - '&7&l> &2Contact me on spigot'
+      - '&c&m---------------------------------------------'
+  help:
+    message:
+      - '&c&m---------------------------------------------'
+      - '&7&l> &f/judgeweapon message <player> <text>'
+      - '&7&l> &f/judgeweapon reload'
+      - '&7&l> &f/judgeweapon make <name>'
+      - '&7&l> &f/judgeweapon link <name> <player>'
+      - '&7&l> &f/judgeweapon unlink <player>'
+      - '&7&l> &f/judgeweapon effect give <player> <effect> <seconds> <amplifier> <particles>'
+      - '&7&l> &f/judgeweapon effect clear <player>'
+      - '&c&m---------------------------------------------'
+  effect:
+    usage:
+      - '&7[&cJudgeWeapon&7] &cUsage: /judgeweapon effect <give, clear>'
+    online:
+      - '&7[&cJudgeWeapon&7] &cThe player is not online!'
+    clear:
+      usage:
+        - '&7[&cJudgeWeapon&7] &cUsage: /judgeweapon effect clear <player>'
+      player: []
+    give:
+      usage:
+        - '&7[&cJudgeWeapon&7] &cUsage: /judgeweapon effect give <player> <effect> <seconds> <amplifier> <particles>'
+      found:
+        - '&7[&cJudgeWeapon&7] &cThe effect is not found.'
+      seconds:
+        - '&7[&cJudgeWeapon&7] &cSeconds is not an integer'
+      amplifier:
+        - '&7[&cJudgeWeapon&7] &cAmplifier is not an integer'
+      player: []
+  reload:
+    usage:
+      - '&7[&cJudgeWeapon&7] &cUsage: /judgeweapon reload <all, config, language, data>'
+    all:
+      - '&7[&cJudgeWeapon&7] &eReloaded all configs'
+    config:
+      - '&7[&cJudgeWeapon&7] &eReloaded config.yml'
+    language:
+      - '&7[&cJudgeWeapon&7] &eReloaded language.yml'
+    data:
+      - '&7[&cJudgeWeapon&7] &eReloaded data.yml'
+  message:
+    usage:
+      - '&7[&cJudgeWeapon&7] &cUsage: /judgeweapon message <player> <text>'
+    online:
+      - '&7[&cJudgeWeapon&7] &cThe player is not online!'
+  make:
+    player:
+      - '&7[&cJudgeWeapon&7] &cThis command can only be used as a player!'
+  link:
+    usage:
+      - '&7[&cJudgeWeapon&7] &cUsage: /judgeweapon link <name> <player>'
+    found:
+      - '&7[&cJudgeWeapon&7] &cThe name is not found.'
+    online:
+      - '&7[&cJudgeWeapon&7] &cThe player is not online!'
+    player:
+      - 'judgeweapon message {target} &7[&cJudgeWeapon&7] &eYou have got an linked item.'
+  unlink:
+    usage:
+      - '&7[&cJudgeWeapon&7] &cUsage: /judgeweapon unlink <player>'
+    online:
+      - '&7[&cJudgeWeapon&7] &cThe player is not online!'
+    player:
+      - 'judgeweapon message {target} &7[&cJudgeWeapon&7] &eYou have been saved from the effects.'

@@ -1,0 +1,91 @@
+#                                         #
+#               JudgeWeapon               #
+#                   by                    #
+#                MathiasMC                #
+#  Any ideas for the plugin or need help? #
+#           contact me on spigot          #
+#                                         #
+
+# Damage player
+damage: true
+
+# Amount to damage
+damage-amount: 1.5
+
+# Remove item if used an item that was not his
+remove: true
+
+# Time commands run every set seconds
+time: 3
+
+time-commands:
+  - 'jw message {player} &7[&cJudgeWeapon&7] &cYou bleed, death is inevitable...'
+
+# How often to run commands section if player has used item that was not his (ticks)
+timer: 70
+
+# Commands run every x amount of ticks
+commands:
+  - 'jw effect give {player} confusion 10 1 false false'
+  - 'jw effect give {player} slow 3 4 false false'
+
+# Commands run when player has used the item that was not his
+run:
+  - 'jw message {player} &7[&cJudgeWeapon&7] &cBoom... you will bleed to death now.'
+
+# Death by using another players item
+death:
+  - 'jw message {player} &7[&cJudgeWeapon&7] &cYou died from using another players item.'
+
+# Check inventory for item on death
+death-scan: true
+
+# Owner dead lost item
+death-owner:
+  - 'jw message {player} &7[&cJudgeWeapon&7] &cYou died and lost your item.'
+
+# If player pickup the item that was his
+pickup-owner:
+  - 'jw message {player} &7[&cJudgeWeapon&7] &7This is your item keep it safe.'
+
+# Owner dropped item
+drop-owner:
+  - 'jw message {player} &7[&cJudgeWeapon&7] &7You dropped your item?'
+
+# Not the owner dropped the item
+drop-other:
+  - 'jw message {player} &7[&cJudgeWeapon&7] &7You dropped someones item'
+
+# If player pickup another players item
+pickup-other:
+  - 'jw message {player} &7[&cJudgeWeapon&7] &7This is not your item you will bleed to death if you use it.'
+
+# Knockback
+knockback: true
+
+# Knockback power (- backwards 1.5 forward)
+knockback-power: -1.5
+
+# Particles
+particle: true
+
+# Item used
+particle-material: redstone_block
+
+# Amount to create
+particle-amount: 35
+
+# Y-Offset
+particle-y-offset: 0.3
+
+# Explode
+explode: true
+
+# Power of explosion if enabled
+explode-power: 0.3
+
+# Set fire
+explode-fire: false
+
+# Can destroy blocks
+explode-block: false

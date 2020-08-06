@@ -1,0 +1,44 @@
+main: me.MathiasMC.JudgeWeapon.JudgeWeapon
+version: ${project.version}
+name: ${project.name}
+author: MathiasMC
+description: ${project.description}
+api-version: 1.14
+softdepend: [PlaceholderAPI]
+commands:
+  judgeweapon:
+    description: "JudgeWeapon main command"
+    aliases: ["jw"]
+permissions:
+  judgeweapon.*:
+    default: "op"
+    description: "Access to use all jw commands"
+    children:
+      judgeweapon.help: true
+      judgeweapon.reload: true
+      judgeweapon.make: true
+      judgeweapon.link: true
+      judgeweapon.unlink: true
+      judgeweapon.message: true
+      judgeweapon.effect: true
+  judgeweapon.help:
+    default: "op"
+    description: "Access to use help"
+  judgeweapon.reload:
+    default: "op"
+    description: "Access to use reload"
+  judgeweapon.make:
+    default: "op"
+    description: "Access to use make"
+  judgeweapon.link:
+    default: "op"
+    description: "Access to use link"
+  judgeweapon.unlink:
+    default: "op"
+    description: "Access to use unlink"
+  judgeweapon.message:
+    default: "op"
+    description: "Access to use message"
+  judgeweapon.effect:
+    default: "op"
+    description: "Access to use effect"
