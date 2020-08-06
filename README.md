@@ -7,4 +7,4 @@
 It's judgement time!
 
 # Downloads
-[spigot]()
+[spigot](https://www.spigotmc.org/resources/judge-weapon.82425/)
