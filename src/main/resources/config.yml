@@ -6,6 +6,24 @@
 #           contact me on spigot          #
 #                                         #
 
+events:
+  # If damage entity
+  EntityDamageByEntity: true
+  # Pickup item
+  EntityPickupItem: true
+  # Used to remove player damage (not recommended to disable)
+  PlayerDeath: true
+  # Drop item
+  PlayerDropItem: true
+  # Right, left click
+  PlayerInteract: true
+  # Interact with an entity
+  PlayerInteractAtEntity: true
+  # Join is used to load player if had quit while has effects
+  PlayerJoin: true
+  # Quit is used to save player if quit while has effects
+  PlayerQuit: true
+
 # Damage player
 damage: true
 

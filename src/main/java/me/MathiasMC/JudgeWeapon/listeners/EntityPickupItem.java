@@ -11,11 +11,11 @@ import org.bukkit.event.entity.EntityPickupItemEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
 
-public class EntityPickup implements Listener {
+public class EntityPickupItem implements Listener {
 
     private final JudgeWeapon plugin;
 
-    public EntityPickup(final JudgeWeapon plugin) {
+    public EntityPickupItem(final JudgeWeapon plugin) {
         this.plugin = plugin;
     }
 

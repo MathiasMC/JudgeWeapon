@@ -14,6 +14,7 @@ import org.bukkit.block.data.BlockData;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -25,6 +26,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 
 public class JudgeWeapon extends JavaPlugin {
 
@@ -49,22 +51,35 @@ public class JudgeWeapon extends JavaPlugin {
         language = new Language(this);
         data = new Data(this);
 
-        getServer().getPluginManager().registerEvents(new PlayerInteract(this), this);
-        getServer().getPluginManager().registerEvents(new PlayerDeath(this), this);
-        getServer().getPluginManager().registerEvents(new EntityPickup(this), this);
-        getServer().getPluginManager().registerEvents(new PlayerJoin(this), this);
-        getServer().getPluginManager().registerEvents(new PlayerQuit(this), this);
-        getServer().getPluginManager().registerEvents(new PlayerDropItem(this), this);
+        if (config.get.getBoolean("events.EntityDamageByEntity")) {
+            getServer().getPluginManager().registerEvents(new EntityDamageByEntity(this), this);
+        }
+        if (config.get.getBoolean("events.EntityPickupItem")) {
+            getServer().getPluginManager().registerEvents(new EntityPickupItem(this), this);
+        }
+        if (config.get.getBoolean("events.PlayerDeath")) {
+            getServer().getPluginManager().registerEvents(new PlayerDeath(this), this);
+        }
+        if (config.get.getBoolean("events.PlayerDropItem")) {
+            getServer().getPluginManager().registerEvents(new PlayerDropItem(this), this);
+        }
+        if (config.get.getBoolean("events.PlayerInteract")) {
+            getServer().getPluginManager().registerEvents(new PlayerInteract(this), this);
+        }
+        if (config.get.getBoolean("events.PlayerInteractAtEntity")) {
+            getServer().getPluginManager().registerEvents(new PlayerInteractAtEntity(this), this);
+        }
+        if (config.get.getBoolean("events.PlayerJoin")) {
+            getServer().getPluginManager().registerEvents(new PlayerJoin(this), this);
+        }
+        if (config.get.getBoolean("events.PlayerQuit")) {
+            getServer().getPluginManager().registerEvents(new PlayerQuit(this), this);
+        }
 
         getCommand("judgeweapon").setExecutor(new JudgeWeapon_Command(this));
         getCommand("judgeweapon").setTabCompleter(new JudgeWeapon_TabComplete(this));
 
-        damageTimer(config.get.getInt("timer")
-                , config.get.getStringList("commands")
-                , config.get.getStringList("time-commands")
-                , config.get.getInt("time")
-
-        );
+        damageTimer(config.get.getInt("timer"));
         new MetricsLite(this, 8437);
     }
 
@@ -72,21 +87,21 @@ public class JudgeWeapon extends JavaPlugin {
         call = null;
     }
 
-    private void damageTimer(final int delay, final List<String> commands, final List<String> timeCommands, final int timeTick) {
+    private void damageTimer(final int delay) {
         new BukkitRunnable() {
-            int time = timeTick;
+            int time = config.get.getInt("time");
             @Override
             public void run() {
                 for (Player player : damageMap) {
                     if (player.isOnline()) {
                         final Location location = player.getLocation();
-                        runCommands(player, location, commands);
+                        runCommands(player, location, config.get.getStringList("commands"));
                         spawnParticle(location);
                         if (config.get.getBoolean("damage")) {
                             player.damage(config.get.getDouble("damage-amount"));
                         }
-                        if (time >= timeTick) {
-                            runCommands(player, location, timeCommands);
+                        if (time >= config.get.getInt("time")) {
+                            runCommands(player, location, config.get.getStringList("time-commands"));
                             time = 0;
                         }
                         time++;
@@ -121,6 +136,44 @@ public class JudgeWeapon extends JavaPlugin {
                     }
                 }
             }
+        }
+    }
+
+    public void checkHand(final Player player) {
+        final ItemStack hand = player.getInventory().getItemInMainHand();
+        final ItemStack offHand = player.getInventory().getItemInOffHand();
+        if (hand.getItemMeta() != null) {
+            checkItem(player, hand.getItemMeta(), true);
+        }
+        if (offHand.getItemMeta() != null) {
+            checkItem(player, offHand.getItemMeta(), false);
+        }
+    }
+
+    public void checkItem(final Player player, final ItemMeta itemMeta, final boolean main) {
+        final String uuid = itemMeta.getPersistentDataContainer().get(new NamespacedKey(this, "judgeweapon_uuid"), PersistentDataType.STRING);
+        if (uuid != null && !player.getUniqueId().toString().equalsIgnoreCase(uuid)) {
+            if (config.get.getBoolean("remove")) {
+                final PlayerInventory inventory = player.getInventory();
+                if (main) {
+                    inventory.setItemInMainHand(new ItemStack(Material.AIR));
+                } else {
+                    inventory.setItemInOffHand(new ItemStack(Material.AIR));
+                }
+            }
+            damageMap.add(player);
+            final Location location = player.getLocation();
+            if (config.get.getBoolean("explode")) {
+                location.getWorld().createExplosion(location.getX(), location.getY(), location.getZ(), Float.parseFloat(Objects.requireNonNull(config.get.getString("explode-power"))), config.get.getBoolean("explode-fire"), config.get.getBoolean("explode-block"));
+            }
+            if (config.get.getBoolean("knockback")) {
+                player.setVelocity(player.getLocation().getDirection().normalize().setY(0).multiply(config.get.getDouble("knockback-power")));
+            }
+            if (config.get.getBoolean("damage")) {
+                player.damage(config.get.getDouble("damage-amount"));
+            }
+            spawnParticle(player.getLocation());
+            runCommands(player, location, config.get.getStringList("run"));
         }
     }
 
